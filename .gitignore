@@ -5,3 +5,6 @@
 *.scm~
 *.scm#*
 .#*.scm
+*/.gradle/
+exercise_1/ex_1.bak
+exercise_1/ex_1.1
