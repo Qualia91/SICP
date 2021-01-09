@@ -424,10 +424,36 @@
 ;; product using accumulate
 (accumulate-iter prod-combiner 1 prod-term 1 inc 5)
 
-; Ex 1.33
+; Ex 1.somethig
+;; newtons method cubic procedure
+(define tolerance 0.000001) 
+  
+ (define (fixed-point f first-guess) 
+   (define (close-enough? v1 v2) 
+     (< (abs (- v1 v2)) tolerance)) 
+     (define (try guess)
+       (let ((next (f guess))) 
+         (if (close-enough? guess next) 
+             next 
+             (try next)))) 
+     (try first-guess)) 
 
+(define dx 0.00001)
 
+(define (deriv g)
+  (lambda (x) (/ (- (g x dx) (g x)) dx)))
 
+(define (newtons-transform g)
+  (lambda (x) (- x (/ (g x) ((deriv g) x)))))
+
+(define (newtons-method g guess)
+  (fixed-point (newtons-transform g) guess))
+
+(define (cubic a b c)
+  (lambda (x)
+    (+ (cube x) (* a (sqr-num x)) (* b x) c))) 
+
+(newtons-method (cubic 1 -3 -3) 1)
 
 
 
